@@ -1,0 +1,29 @@
+.header-main {
+  height: 5%;
+  padding: 5px;
+  border-radius: 1px;
+  border-color: black;
+  background-color: #008cba;
+  color: aliceblue;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.header-component {
+  display: flex;
+  justify-content: center;
+  flex-grow: 1;
+  gap: 1rem;
+}
+
+button,
+a {
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: #324146;
+  }
+}
