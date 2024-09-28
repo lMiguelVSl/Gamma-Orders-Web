@@ -6,34 +6,34 @@
     <div class="card-content">
       <form [formGroup]="UserForm" class="form-div">
         <div class="form-group">
-          <label for="firstName">First Name</label>
+          <label for="name">Name</label>
           <input
             type="text"
-            id="firstName"
-            name="firstName"
-            [formControlName]="'firstName'"
+            id="name"
+            name="name"
+            [formControlName]="'name'"
             class="form-control"
             autocomplete="off"
             required
           />
-          <span class="error" *ngIf="UserForm.controls['firstName'].touched && UserForm.controls['firstName'].invalid">
-            The First Name is required
+          <span class="error" *ngIf="UserForm.controls['name'].touched && UserForm.controls['name'].invalid">
+            The Name is required
           </span>
         </div>
 
         <div class="form-group">
-          <label for="secondName">Second Name</label>
+          <label for="email">Email</label>
           <input
             type="text"
-            id="secondName"
-            name="secondName"
-            [formControlName]="'secondName'"
+            id="email"
+            name="email"
+            [formControlName]="'email'"
             class="form-control"
             autocomplete="off"
             required
           />
-          <span class="error" *ngIf="UserForm.controls['secondName'].touched && UserForm.controls['secondName'].invalid">
-            The Second Name is required
+          <span class="error" *ngIf="UserForm.controls['email'].touched && UserForm.controls['email'].invalid">
+            The Email is required
           </span>
         </div>
 

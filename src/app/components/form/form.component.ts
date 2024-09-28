@@ -13,14 +13,16 @@ import { User, UserService } from '../../services';
   styleUrl: './form.component.scss'
 })
 export class FormComponent {
-  User: User = { id: 0, firstName: '', secondName: '', ubication: '' };
+  User: User = { id: 0, idClient: 0, name: '', ubication: '', email: '' };
   UserForm: FormGroup;
   UserId: number = 0;
 
+  users: User[] = [];
+
   constructor(private formBuilder: FormBuilder, private userService: UserService, private router: Router, private route: ActivatedRoute) {
     this.UserForm = this.formBuilder.group({
-      firstName: ['', Validators.required],
-      secondName: ['', Validators.required],
+      name: ['', Validators.required],
+      email: ['', Validators.required],
       ubication: ['', Validators.required]
     });
 
@@ -44,21 +46,26 @@ export class FormComponent {
 
   addUser() {
     if (this.UserForm.status === 'VALID') {
-      this.User.firstName = this.UserForm.value.firstName;
-      this.User.secondName = this.UserForm.value.secondName;
+      this.User.name = this.UserForm.value.name;
+      this.User.email = this.UserForm.value.email;
       this.User.ubication = this.UserForm.value.ubication;
 
-      this.userService.createUser(this.User).pipe().subscribe(
-        {
-          next: (id) => {
-            if (id != 0) this.nagivate('grid');
-          },
-          error: (err) => {
-            console.group('Error Adding User:', err);
-          }
-        }
-      );
+      this.users.push(this.User);
+      localStorage.setItem('users', JSON.stringify(this.users));
+      // this.userService.createUser(this.User).pipe().subscribe(
+      //   {
+      //     next: (id) => {
+      //       if (id != 0) this.nagivate('grid');
+      //     },
+      //     error: (err) => {
+      //       console.group('Error Adding User:', err);
+      //     }
+      //   }
+      // );
     }
+
+    this.UserForm.reset();
+    this.router.navigate(['/item-list']);
   }
 
   // updateUser() {

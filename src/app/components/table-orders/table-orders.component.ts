@@ -1,29 +1,21 @@
 import { Component } from '@angular/core';
-import { Restaurant, User, UserService } from '../../services';
+import { User, UserService } from '../../services';
 import { Router } from '@angular/router';
 import { BaseModule } from '../../shared/base/base.module';
-import { CommonModule } from '@angular/common';
+import { Dish } from '../../services/Models/Dish.type';
 
 @Component({
   selector: 'app-table',
   standalone: true,
   imports: [BaseModule],
-  templateUrl: './table-restaurant.component.html',
-  styleUrl: './table-restaurant.component.scss'
+  templateUrl: './table-orders.component.html',
+  styleUrl: './table-orders.component.scss'
 })
-export class TableComponent {
+export class TableOrdersComponent {
 
-  displayedColumns: any[] = ['Name', 'Dishes'];
-  dataSource: Restaurant[] = [{
-    id: 0,
-    name: '',
-    dishes: [{
-      id: 0,
-      name: 'dish',
-      price: 0,
-      description: 'description'
-    }],
-  }];
+  displayedColumns: any[] = ['Name', 'Price', 'Description', 'Add'];
+  dataSource: Dish[] = [];
+  itemsAdded: Dish[] = [];
 
   constructor(private userService: UserService, private router: Router) {
     this.loadData();
@@ -34,23 +26,23 @@ export class TableComponent {
     //   if(data.length === 0) this.router.navigate([`/actions`]);
     //   this.dataSource = data;
     // });
-      let restaurants: Restaurant[] = [];
-      restaurants.push({
+    let dishesState = localStorage.getItem('dishes');
+    if(dishesState) {
+      let dishes: Dish[] = JSON.parse(dishesState) as Dish[];
+      this.dataSource = [...dishes];
+    } else {
+      this.dataSource = [{
         id: 0,
-        name: 'Miguel\'s Restaurant',
-        dishes: [{
-          id: 0,
-          name: 'burguer',
-          price: 10000,
-          description: 'Burguer with cheese'
-        }, {
-          id: 1,
-          name: 'Pizza',
-          price: 0,
-          description: ''
-        }]
-      });
-      this.dataSource = [...restaurants];
+        name: 'burguer',
+        price: 10000,
+        description: 'Burguer with cheese'
+      }, {
+        id: 1,
+        name: 'Pizza',
+        price: 25000,
+        description: 'Hawaiana'
+      }]
+    }
   }
 
   deleteUser(element: User) {
@@ -64,5 +56,9 @@ export class TableComponent {
     // });
 
     this.dataSource = this.dataSource.filter(x => x.id !== element.id);
+  }
+
+  AddItem(element: Dish) {
+    this.itemsAdded.push(element);
   }
 }
