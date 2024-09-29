@@ -22,8 +22,4 @@ export class UserService {
         return this.http.put(`${environment.baseUrl}${Endpoints.User.updateUser.path()}`, User);
     }
 
-    deleteUser(UserId: number) {
-        return this.http.delete<string>(`${environment.baseUrl}${Endpoints.User.updateUser.path()}?taskId=${UserId}`, { responseType: 'text' as 'json' });
-    }
-
 }

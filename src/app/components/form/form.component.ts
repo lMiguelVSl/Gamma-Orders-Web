@@ -13,7 +13,7 @@ import { User, UserService } from '../../services';
   styleUrl: './form.component.scss'
 })
 export class FormComponent {
-  User: User = { id: 0, idClient: 0, name: '', ubication: '', email: '' };
+  User: User = { id: 0, nombre: '', ubication: '', email: '' };
   UserForm: FormGroup;
   UserId: number = 0;
 
@@ -27,64 +27,27 @@ export class FormComponent {
     });
 
   }
-  // ngOnInit(): void {
-  //   this.route.queryParams.subscribe((params: Params) => {
-  //     if (params['title'])  {
-  //       this.UserId = parseInt(params['id']);
-  //       this.UserForm.patchValue({
-  //         title: params['title'],
-  //         isDone: params['isDone'] === 'true' ? true : false,
-  //       });
-  //     } else {
-  //       this.UserForm.patchValue({
-  //         title: '',
-  //         isDone: false,
-  //       });
-  //     }
-  //   });
-  // }
 
   addUser() {
     if (this.UserForm.status === 'VALID') {
-      this.User.name = this.UserForm.value.name;
+      this.User.nombre = this.UserForm.value.name;
       this.User.email = this.UserForm.value.email;
       this.User.ubication = this.UserForm.value.ubication;
 
-      this.users.push(this.User);
-      localStorage.setItem('users', JSON.stringify(this.users));
-      // this.userService.createUser(this.User).pipe().subscribe(
-      //   {
-      //     next: (id) => {
-      //       if (id != 0) this.nagivate('grid');
-      //     },
-      //     error: (err) => {
-      //       console.group('Error Adding User:', err);
-      //     }
-      //   }
-      // );
+      this.userService.createUser(this.User).subscribe(
+        {
+          next: (id) => {
+            if (id != 0) this.nagivate('grid');
+          },
+          error: (err) => {
+            console.group('Error Adding User:', err);
+          }
+        }
+      );
+      this.UserForm.reset();
+      this.router.navigate(['/item-list']);
     }
-
-    this.UserForm.reset();
-    this.router.navigate(['/item-list']);
   }
-
-  // updateUser() {
-  //   if (this.UserForm.status === 'VALID') {
-  //     this.User.id = this.UserId;
-  //     this.User.title = this.UserForm.value.title;
-  //     this.User.isDone = this.UserForm.value.isDone;
-
-  //     this.UserService.updateUser(this.User).subscribe({
-  //       next: (res) => {
-  //         console.log('update response', res);
-  //         this.router.navigate(['/item-list']);
-  //       },
-  //       error: (err) => {
-  //         console.log('error updating User:', err);
-  //       }
-  //     });
-  //   }
-  // }
 
   nagivate(page: string) {
     switch (page) {

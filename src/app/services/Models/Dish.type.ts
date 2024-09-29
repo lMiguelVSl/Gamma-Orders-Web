@@ -1,6 +1,5 @@
 export interface Dish { 
-    id: number;
-    name: string;
-    price: number;
-    description: string;
+    idPlato: number;
+    nombre: string;
+    precio: number;
 }

@@ -1,11 +1,15 @@
 import { Routes } from '@angular/router';
 import { HomeComponent, ErrorPageComponent, NotAuthPageComponent } from './views';
 import { FormComponent, TableComponent } from './components';
-import { AuthGuard } from './auth/guards/auth.guard';
 import { TableOrdersComponent } from './components/table-orders/table-orders.component';
+import { TableDishesComponent } from './components/table-dishes/table-dishes.component';
 
 export const routes: Routes = [
     {
+        path: 'dishes/:idRestaurante',
+        component: TableDishesComponent,
+    },
+        {
         path: 'item-list/dishes',
         component: TableOrdersComponent,
     },
