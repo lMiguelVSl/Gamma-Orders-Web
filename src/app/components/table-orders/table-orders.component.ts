@@ -13,15 +13,23 @@ import { Order } from '../../services/order/models';
 })
 export class TableOrdersComponent implements OnInit {
 
-  displayedColumns: any[] = ['Price', 'Description', 'Add'];
-  dataSource: Order[] = [];
+  displayedColumns: string[] = ['Order ID', 'N.Dishes', 'Status'];
+  dataSource: Order[] = [{
+    cliente: {
+      id: 0,
+      nombre: '',
+      email: '',
+      ubicacion: ''
+    },
+    estado: '',
+    platos: []
+  }];
 
   constructor(private orderService: OrderService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     const userId = this.route.snapshot.paramMap.get('idUser');
     if (userId) this.orderService.getOrdersByClientId(userId).subscribe(orders => {
-      console.log(orders);
       this.dataSource = orders;
     });
   }

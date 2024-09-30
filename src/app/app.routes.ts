@@ -16,12 +16,10 @@ export const routes: Routes = [
     {
         path: 'actions',
         component: FormComponent,
-        //canActivate: [AuthGuard]
     },
     {
         path: 'item-list',
         component: TableComponent,
-        //canActivate: [AuthGuard]
     },
     {
         path: 'Home',
