@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseModule } from '../../shared/base/base.module';
-import { Dish } from '../../services/Models/Dish.type';
+import { OrderService } from '../../services/order/order.service';
+import { ActivatedRoute } from '@angular/router';
+import { Order } from '../../services/order/models';
 
 @Component({
   selector: 'app-table-orders',
@@ -11,15 +13,16 @@ import { Dish } from '../../services/Models/Dish.type';
 })
 export class TableOrdersComponent implements OnInit {
 
-  displayedColumns: any[] = ['Name', 'Price', 'Description', 'Add'];
-  dataSource: Dish[] = [];
-  itemsAdded: Dish[] = [];
+  displayedColumns: any[] = ['Price', 'Description', 'Add'];
+  dataSource: Order[] = [];
+
+  constructor(private orderService: OrderService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
-  }
-
-  AddItem(element: Dish) {
-    this.itemsAdded.push(element);
+    const userId = this.route.snapshot.paramMap.get('idUser');
+    if (userId) this.orderService.getOrdersByClientId(userId).subscribe(orders => {
+      console.log(orders);
+      this.dataSource = orders;
+    });
   }
 }

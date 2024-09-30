@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BaseModule } from '../../shared/base/base.module';
 import { Dish } from '../../services/Models/Dish.type';
 import { Restaurant, User } from '../../services';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { OrderService } from '../../services/order/order.service';
 import { Order } from '../../services/order/models';
 
@@ -20,7 +20,7 @@ export class TableDishesComponent implements OnInit {
   itemsAdded: Dish[] = [];
   totalAmount: number = 0;
 
-  constructor(private route: ActivatedRoute, private orderService: OrderService) {
+  constructor(private route: ActivatedRoute, private orderService: OrderService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -70,6 +70,7 @@ export class TableDishesComponent implements OnInit {
         console.log('Pedido creado:', data);
         this.itemsAdded = [];
         this.totalAmount = 0;
+        this.router.navigate(['/item-list/orders', user.id]);
       },
       error: err => {
         console.error('Error al crear el pedido: ', err);

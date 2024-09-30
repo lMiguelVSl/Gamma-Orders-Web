@@ -15,6 +15,10 @@ export class OrderService {
         return this.http.get<Order[]>(`${environment.restaurantUrl}${Endpoints.Order.getOrders.path()}`);
     }
 
+    getOrdersByClientId(id: string) {
+        return this.http.get<Order[]>(`${environment.restaurantUrl}${Endpoints.Order.getOrders.path()}/${id}`);
+    }
+
     postOrders(order: Order) {
         return this.http.post(`${environment.restaurantUrl}${Endpoints.Order.createOrder.path()}`, order);
     }

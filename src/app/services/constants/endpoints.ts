@@ -14,6 +14,7 @@ export const Endpoints = {
     },
     Order: {
         getOrders: { method: 'get', path: () => `/pedidos` },
+        getOrdersByClientId: { method: 'get', path: () => `/pedidos/cliente` },
         createOrder: { method: 'post', path: () => `/pedidos` },
         updateOrder: { method: 'put', path: () => `/pedidos` },
     },

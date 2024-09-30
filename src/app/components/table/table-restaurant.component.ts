@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Restaurant } from '../../services';
 import { Router } from '@angular/router';
 import { BaseModule } from '../../shared/base/base.module';
@@ -12,12 +12,17 @@ import { filter, map, take } from 'rxjs/operators';
   templateUrl: './table-restaurant.component.html',
   styleUrl: './table-restaurant.component.scss'
 })
-export class TableComponent {
+export class TableComponent implements OnInit {
 
   displayedColumns: any[] = ['Name', 'See Dishes'];
   dataSource: Restaurant[] = [];
+  authenticated: boolean = false;
 
-  constructor(private restaurantService: RestaurantService) {
+  constructor(private restaurantService: RestaurantService, private router: Router) {
+  }
+  ngOnInit(): void {
+    sessionStorage.getItem('userId') ? this.authenticated = true : this.authenticated = false;
+    if(!this.authenticated) this.router.navigate(['/NotAuthorized']);
     this.loadData();
   }
 

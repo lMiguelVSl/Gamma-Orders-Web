@@ -10,7 +10,7 @@ export const routes: Routes = [
         component: TableDishesComponent,
     },
         {
-        path: 'item-list/dishes',
+        path: 'item-list/orders/:idUser',
         component: TableOrdersComponent,
     },
     {

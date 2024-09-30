@@ -14,24 +14,16 @@ import { map } from 'rxjs';
 export class HeaderComponent implements OnInit{
 
   user: string = 'Empty';
-  constructor(private headerFacade: HeaderFacade) { }
+  constructor() { }
 
   ngOnInit(): void {
     window.onbeforeunload = () => {
-      localStorage.clear();
+      sessionStorage.clear();
     };
   }
 
   GetToken() {
-    this.headerFacade.GetToken('username').pipe(map(x => {
-      localStorage.setItem('user', x.toString());
-    })).subscribe({
-      next: () => {
-        this.user = localStorage.getItem('user')?.valueOf() ?? 'Not Authenticated';
-      },
-      error: (error) => {
-        console.error('Error getting user: ',error);
-      }
-    });
+    sessionStorage.setItem('userId', '2');
+    this.user = 'Miguel';
   }
 }
