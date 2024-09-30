@@ -26,6 +26,10 @@ export const routes: Routes = [
         component: HomeComponent
     },
     {
+        path: '',
+        component: HomeComponent
+    },
+    {
         path: 'NotAuthorized',
         component: NotAuthPageComponent
     },
