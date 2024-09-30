@@ -11,5 +11,10 @@ export const Endpoints = {
     },
     Restaurant: {
         getRestaurants: { method: 'get', path: () => `/restaurantes` },
-    }
+    },
+    Order: {
+        getOrders: { method: 'get', path: () => `/pedidos` },
+        createOrder: { method: 'post', path: () => `/pedidos` },
+        updateOrder: { method: 'put', path: () => `/pedidos` },
+    },
 }

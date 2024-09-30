@@ -1,5 +1,13 @@
 <div class="container">
-    <h1>Items Added: {{itemsAdded.length}}</h1>
+    <div class="header-table">
+        <div>
+            <h1>Items Added: {{itemsAdded.length}}</h1>
+            <h3>Total: {{totalAmount}}</h3>
+        </div>
+        <div>
+            <button mat-raised-button color="primary" (click)="createOrder()">Create Order</button>
+        </div>
+    </div>
     <table class="container-table" mat-table *ngIf="dataSource.length > 0" [dataSource]="dataSource">
 
         <ng-container matColumnDef="Name">
