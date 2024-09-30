@@ -13,7 +13,7 @@ import { User, UserService } from '../../services';
   styleUrl: './form.component.scss'
 })
 export class FormComponent {
-  User: User = { id: 0, nombre: '', ubication: '', email: '' };
+  User: User = { id: 0, nombre: '', ubicacion: '', email: '' };
   UserForm: FormGroup;
   UserId: number = 0;
 
@@ -32,7 +32,7 @@ export class FormComponent {
     if (this.UserForm.status === 'VALID') {
       this.User.nombre = this.UserForm.value.name;
       this.User.email = this.UserForm.value.email;
-      this.User.ubication = this.UserForm.value.ubication;
+      this.User.ubicacion = this.UserForm.value.ubication;
 
       this.userService.createUser(this.User).subscribe(
         {

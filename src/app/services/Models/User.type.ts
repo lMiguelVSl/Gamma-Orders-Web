@@ -2,5 +2,5 @@ export interface User {
     id: number;
     nombre: string;
     email: string;
-    ubication: string;
+    ubicacion: string;
 }

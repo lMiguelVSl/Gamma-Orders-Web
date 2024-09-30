@@ -52,10 +52,10 @@ export class TableDishesComponent implements OnInit {
     }
 
     let user: User = {
-      id: 23,
+      id: 2,
       nombre: 'Miguel',
       email: 'miguel.test@hotmail.com',
-      ubication: 'K12 8'
+      ubicacion: 'K12 8'
     }
 
     let orderRequest: Order = {
@@ -64,12 +64,15 @@ export class TableDishesComponent implements OnInit {
       platos: this.itemsAdded
     };
 
+
     this.orderService.postOrders(orderRequest).subscribe({
       next: data => {
         console.log('Pedido creado:', data);
+        this.itemsAdded = [];
+        this.totalAmount = 0;
       },
-      error: () => {
-        console.error('Error al crear el pedido');
+      error: err => {
+        console.error('Error al crear el pedido: ', err);
       }
     });
 
